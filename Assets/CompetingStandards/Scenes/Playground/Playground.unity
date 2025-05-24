@@ -10072,10 +10072,10 @@ MonoBehaviour:
   RB: {fileID: 1709737399}
   _gravity: {x: 0, y: -9.8, z: 0}
   _maxBasicSpeed: 50
-  _basicAcceleration: 2
-  _basicDecceleration: 5
+  _basicAcceleration: 0.8
+  _basicDecceleration: 3
   _limitSpeed: 0
-  _slopeForce: 20
+  _slopeForce: 40
   _wallCheckDistance: 0.4
   _wallCheckHeight: 1
   _wallCheckRadius: 0.45
