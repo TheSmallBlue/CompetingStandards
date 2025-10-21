@@ -1,21 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SmallBlue.InspectorUtilities;
+using CompetingStandards;
 
 [RequireComponent(typeof(Character))]
 [RequireComponent(typeof(CameraController))]
-public class PlayerInput : MonoBehaviour
+public class TempInput : MonoBehaviour
 {
+    // TODO: Replace with unity's new input system
+
     [SerializeField, RequireAndAssignComponent] Character character;
     [SerializeField, RequireAndAssignComponent] CameraController cameraController;
 
-    private void FixedUpdate() 
+    // ---
+
+    private void FixedUpdate()
     {
-        var yInput = Input.GetAxisRaw("Vertical");
         var xInput = Input.GetAxisRaw("Horizontal");
+        var yInput = Input.GetAxisRaw("Vertical");
 
         var input = Camera.main.transform.forward.CollapseAxis(Axis.Y).normalized * yInput + Camera.main.transform.right * xInput;
-        character.Move(input.x, input.z);
+        character.Move(input);
     }
 
     private void LateUpdate() 

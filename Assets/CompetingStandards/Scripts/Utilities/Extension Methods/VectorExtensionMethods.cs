@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public static class VectorExtensionMethods
 {
 
@@ -52,6 +53,8 @@ public static class VectorExtensionMethods
 
     #endregion
 
+    #region Vector Management
+
     /// <summary>
     /// Collapses the direction of a vector.
     /// </summary>
@@ -62,7 +65,8 @@ public static class VectorExtensionMethods
     {
         return source - (Vector3.Dot(source, direction) * direction);
     }
-    //Vector3.Dot() It lets you get the magnitude of a component of a vector that is in a particular direction
+
+    #endregion
 }
 
 public enum Axis
@@ -78,7 +82,4 @@ public enum Axis
     ZY = 6,
     XYZ = 7
 }
-
-
-
 
