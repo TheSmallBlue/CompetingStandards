@@ -9,5 +9,5 @@ EditorBuildSettings:
     path: Assets/CompetingStandards/Scenes/Playground/Playground.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2b860006626d9ee42bca8ad280625f24,
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 67faad8d1ab54aa4a8e2a40466d3d31f,
       type: 3}
