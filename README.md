@@ -1,2 +1,2 @@
 # CompetingStandards
- A Sonic Engine made in Unity
+ A Sonic-Inspired Unity Framework for making Sonic-Inspired Unity Games
