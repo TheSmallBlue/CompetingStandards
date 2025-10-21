@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/CompetingStandards/CharacterStateMachineEditor.uss?fileID=7433441132597879392&amp;guid=6fa51d531d309e74b87234b27e716553&amp;type=3#CharacterStateMachineEditor" />
+    <SplitView fixed-pane-initial-dimension="100">
+        <ui:VisualElement style="flex-grow: 1; background-color: rgb(53, 53, 53);">
+            <ui:Label tabindex="-1" text="Inspector" parse-escape-sequences="true" display-tooltip-when-elided="true" style="background-color: rgba(0, 0, 0, 0); color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-align: middle-center; height: 37px;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1;">
+            <CharacterStateMachineGraph style="height: auto; flex-grow: 1;" />
+        </ui:VisualElement>
+    </SplitView>
+</ui:UXML>
