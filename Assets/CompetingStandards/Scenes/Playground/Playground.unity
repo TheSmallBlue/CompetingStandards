@@ -7579,7 +7579,7 @@ GameObject:
   - component: {fileID: 1284099007}
   - component: {fileID: 1284099006}
   m_Layer: 0
-  m_Name: Cube (12)
+  m_Name: Dash Pad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10494,7 +10494,6 @@ MonoBehaviour:
   _maxBasicSpeed: 50
   _basicAcceleration: 0.8
   _basicDecceleration: 3
-  _limitSpeed: 0
   _speedAdaptabilityDelta: 1
   _slopeForce: 4
   _maxSlopeAngle: 90

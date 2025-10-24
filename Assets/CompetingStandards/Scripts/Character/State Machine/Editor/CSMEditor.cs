@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
@@ -41,7 +42,7 @@ namespace CompetingStandards.CSM
             // Array size field, "Add State" button
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            AddStateButton();
+            AddItemToSerializedArrayButton(stateArray, typeof(CSM.State), out bool buttonPressed);
             EditorGUILayout.EndHorizontal();
 
             // Save changes
@@ -60,61 +61,108 @@ namespace CompetingStandards.CSM
                 // Properties for the selected type
                 EditorGUILayout.PropertyField(state, new GUIContent($"State {i}: {GetPropertyTypeNameAsString(state)}"), true);
 
+                // Transitions array
                 EditorGUILayout.LabelField("Transitions: ");
-                TransitionsArrayField(); // List of transitions from that state
+                TransitionsArrayField(i); // List of transitions from that state
+
+                // Add transition button
+                EditorGUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
+                AddItemToSerializedArrayButton(transitionsArray, typeof(CSM.Transition), out bool buttonPressed);
+                if(buttonPressed && transitionsArray.arraySize > 0)
+                {
+                    ChangeTransitionSource(() => transitionsArray.arraySize - 1, i);
+                }
+                EditorGUILayout.EndHorizontal();
 
                 // Remove item button
                 EditorGUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
-                RemoveStateButton(i);
+                RemoveItemFromSerializedArrayButton(stateArray, i);
                 EditorGUILayout.EndHorizontal();
 
                 EditorGUILayout.EndVertical();
             }
         }
 
-        void TransitionsArrayField()
+        void TransitionsArrayField(int sourceStateIndex)
         {
             // TODO
+            for (int i = 0; i < transitionsArray.arraySize; i++)
+            {
+                SerializedProperty transition = transitionsArray.GetArrayElementAtIndex(i);
+
+                if (transition.FindPropertyRelative("FromIndex").intValue != sourceStateIndex)
+                    continue;
+
+                // Containing box
+                EditorGUI.DrawRect(EditorGUILayout.BeginVertical(), new Color(0.122f, 0.122f, 0.122f, 1.000f));
+
+                // Properties for the selected type
+                EditorGUILayout.PropertyField(transition, new GUIContent($"Transition {i}: {GetPropertyTypeNameAsString(transition)}"), true);
+
+                // State to transition to
+                EditorGUILayout.LabelField("Transition to:");
+                transition.FindPropertyRelative("ToIndex").intValue = EditorGUILayout.Popup(transition.FindPropertyRelative("ToIndex").intValue, GetSerializedArrayTypesAsStrings(stateArray));
+
+                // Remove transition button
+                EditorGUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
+                RemoveItemFromSerializedArrayButton(transitionsArray, i);
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.EndVertical();
+            }
         }
 
         // ---
 
-        void AddStateButton()
+        async void ChangeTransitionSource(Func<int> transitionIndexDelegate, int newValue)
         {
-            if (!GUILayout.Button("+")) return;
+            await Task.Delay(1);
+
+            transitionsArray.GetArrayElementAtIndex(transitionIndexDelegate()).FindPropertyRelative("FromIndex").intValue = newValue;
+        }
+
+        // ---
+
+        void AddItemToSerializedArrayButton(SerializedProperty serializedArray, Type itemType, out bool buttonPressed)
+        {
+            buttonPressed = GUILayout.Button("+");
+            if (!buttonPressed) return;
 
             // Create a dropdown menu with all state types as our items
             var menu = new GenericMenu();
-            var states = GetAllStateTypes();
+            var states = GetAllInheritingTypesOf(itemType);
 
             foreach (var stateType in states)
             {
-                menu.AddItem(new GUIContent(stateType.Name), false, () => AddState(stateType));
+                menu.AddItem(new GUIContent(stateType.Name), false, () => AddItemToSerializedArray(serializedArray, stateType));
             }
 
             menu.ShowAsContext();
         }
 
-        void RemoveStateButton(int stateIndex)
+        void RemoveItemFromSerializedArrayButton(SerializedProperty serializedArray, int itemIndex)
         {
             if (!GUILayout.Button("-")) return;
 
-            RemoveState(stateIndex);
+            RemoveItemFromSerializedArray(serializedArray, itemIndex);
         }
 
         // ---
 
-        void AddState(Type type)
+        void AddItemToSerializedArray(SerializedProperty serializedArray, Type type)
         {
+            if (!serializedArray.isArray) return;
 
-            stateArray.arraySize++;
-            stateArray.GetArrayElementAtIndex(stateArray.arraySize - 1).managedReferenceValue = Activator.CreateInstance(type);
+            serializedArray.arraySize++;
+            serializedArray.GetArrayElementAtIndex(serializedArray.arraySize - 1).managedReferenceValue = Activator.CreateInstance(type);
         }
-
-        void RemoveState(int index)
+        
+        void RemoveItemFromSerializedArray(SerializedProperty serializedArray, int itemIndex)
         {
-            stateArray.DeleteArrayElementAtIndex(index);
+            serializedArray.DeleteArrayElementAtIndex(itemIndex);
         }
 
         // ---
@@ -125,19 +173,26 @@ namespace CompetingStandards.CSM
             return fullName.Substring(fullName.LastIndexOf(".") + 1);
         }
 
+        string[] GetSerializedArrayTypesAsStrings(SerializedProperty serializedArray)
+        {
+            List<string> output = new();
+
+            for (int i = 0; i < serializedArray.arraySize; i++)
+            {
+                output.Add($"{i}: {GetPropertyTypeNameAsString(serializedArray.GetArrayElementAtIndex(i))}");
+            }
+
+            return output.ToArray();
+        }
+
         // ---
 
-        private List<Type> GetAllStateTypes()
+        List<Type> GetAllInheritingTypesOf(Type type)
         {
             return AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(asm => asm.GetTypes())
-                .Where(t => typeof(CSM.State).IsAssignableFrom(t) && !t.IsAbstract && t.IsClass)
+                .Where(t => type.IsAssignableFrom(t) && !t.IsAbstract && t.IsClass)
                 .ToList();
-        }
-
-        private List<string> GetAllStateTypesString()
-        {
-            return GetAllStateTypes().Select(x => x.Name).ToList();
         }
     }
 }

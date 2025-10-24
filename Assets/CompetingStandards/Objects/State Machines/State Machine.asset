@@ -10,18 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7738ca600cb7364f94ad85d9f509a65, type: 3}
-  m_Name: Basic State Machine
+  m_Name: State Machine
   m_EditorClassIdentifier: 
+  states: []
   transitions: []
-  states:
-  - rid: 3797510241977368576
-  - rid: 3797510241977368577
   references:
     version: 2
-    RefIds:
-    - rid: 3797510241977368576
-      type: {class: CharacterStateMovement, ns: CompetingStandards.CSM.States, asm: Assembly-CSharp}
-      data: 
-    - rid: 3797510241977368577
-      type: {class: CharacterStateJump, ns: CompetingStandards.CSM.States, asm: Assembly-CSharp}
-      data: 
+    RefIds: []

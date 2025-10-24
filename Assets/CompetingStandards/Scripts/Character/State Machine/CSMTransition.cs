@@ -5,14 +5,10 @@ using UnityEngine;
 namespace CompetingStandards.CSM
 {
     [System.Serializable]
-    public abstract class Transition : Object
+    public abstract class Transition
     {
-        public int FromIndex => fromIndex;
-        public int ToIndex => toIndex;
-
-        // ---
-
-        [SerializeField] protected int fromIndex, toIndex;
+        [HideInInspector] public int FromIndex;
+        [HideInInspector] public int ToIndex;
 
         // ---
 

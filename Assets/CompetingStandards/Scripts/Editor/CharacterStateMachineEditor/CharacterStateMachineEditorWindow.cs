@@ -9,7 +9,7 @@ public class CharacterStateMachineEditorWindow : EditorWindow
     private VisualTreeAsset m_VisualTreeAsset = default;
 
     [MenuItem("CompetingStandards/Character State Machine Editor")]
-    public static void Open(CompetingStandards.CSM.StateMachine stateMachine)
+    public static void Open()
     {
         // TODO: Load statemachine info into editor
 
@@ -31,6 +31,8 @@ public class CharacterStateMachineEditorWindow : EditorWindow
     }
 }
 
+/*
+
 public static class StateMachineWindowOpener
 {
     [OnOpenAsset()]
@@ -47,3 +49,5 @@ public static class StateMachineWindowOpener
         return false;
     }
 }
+
+*/
