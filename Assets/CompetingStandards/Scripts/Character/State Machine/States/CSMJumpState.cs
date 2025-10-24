@@ -8,6 +8,9 @@ namespace CompetingStandards.CSM.States
     [System.Serializable]
     public class CharacterStateJump : CompetingStandards.CSM.State
     {
-        public float test;
+        protected override void OnStateUpdate()
+        {
+            Debug.Log("Jump state");
+        }
     }
 }

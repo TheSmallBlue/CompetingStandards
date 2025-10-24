@@ -10512,6 +10512,7 @@ MonoBehaviour:
   _groundSnappingFloorHeight: 0
   _groundSnappingRequiredDistance: 0.3
   _groundSnappingForce: 100
+  stateMachine: {fileID: 11400000, guid: 97029ca8d7bbad94e96db9b69eb5d074, type: 2}
   playerMesh: {fileID: 1267083711}
   groundSnappingPlayerMeshOffset: {x: 0, y: 1, z: 0}
   groundSnappingTime: 0.05

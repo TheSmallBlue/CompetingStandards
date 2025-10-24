@@ -7,12 +7,15 @@ using UnityEngine.InputSystem;
 namespace CompetingStandards.CSM.Transitions
 {
     [System.Serializable]
-    public class CSMInputTransition : Transition
+    public class CSMInputPressedTransition : Transition
     {
         [SerializeField] InputActionReference input;
+
+        // ---
+
         public override bool CanTransition()
         {
-            return true;
+            return input.action.IsPressed();
         }
     }
 }

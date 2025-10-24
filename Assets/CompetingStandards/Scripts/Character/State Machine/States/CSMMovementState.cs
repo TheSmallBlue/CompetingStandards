@@ -8,6 +8,9 @@ namespace CompetingStandards.CSM.States
     [System.Serializable]
     public class CharacterStateMovement : CompetingStandards.CSM.State
     {
-        
+        protected override void OnStateUpdate()
+        {
+            Debug.Log("Movement state");
+        }
     }
 }

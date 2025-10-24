@@ -12,8 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7738ca600cb7364f94ad85d9f509a65, type: 3}
   m_Name: State Machine
   m_EditorClassIdentifier: 
-  states: []
-  transitions: []
+  states:
+  - rid: 3797510297815089275
+  - rid: 3797510297815089276
+  transitions:
+  - rid: 3797510297815089277
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3797510297815089275
+      type: {class: CharacterStateMovement, ns: CompetingStandards.CSM.States, asm: Assembly-CSharp}
+      data: 
+    - rid: 3797510297815089276
+      type: {class: CharacterStateJump, ns: CompetingStandards.CSM.States, asm: Assembly-CSharp}
+      data: 
+    - rid: 3797510297815089277
+      type: {class: CSMInputPressedTransition, ns: CompetingStandards.CSM.Transitions,
+        asm: Assembly-CSharp}
+      data:
+        FromIndex: 0
+        ToIndex: 1
+        input: {fileID: -2099379676528639254, guid: 67faad8d1ab54aa4a8e2a40466d3d31f,
+          type: 3}
