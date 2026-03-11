@@ -7,11 +7,28 @@ namespace CompetingStandards.CSM
     [System.Serializable]
     public abstract class Transition
     {
-        [HideInInspector] public int FromIndex;
-        [HideInInspector] public int ToIndex;
+        public CSM.StateMachine SourceMachine { get; private set; }
+        public Character SourceCharacter => SourceMachine.SourceCharacter;
+
+        // ---
+
+        public int ToIndex;
+
+        // ---
+
+        protected bool initialized { get; private set; }
 
         // ---
 
         public abstract bool CanTransition();
+
+        // ---
+
+        public void Initialize(CSM.StateMachine source)
+        {
+            SourceMachine = source;
+
+            initialized = true;
+        }
     }
 }

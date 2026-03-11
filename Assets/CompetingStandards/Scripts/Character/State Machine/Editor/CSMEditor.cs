@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace CompetingStandards.CSM
 {
-    [CustomEditor(typeof(CSM.StateMachine))]
+    //[CustomEditor(typeof(CSM.StateMachine))]
     public class CSMEditor : Editor
     {
         SerializedProperty stateArray;

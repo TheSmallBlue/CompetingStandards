@@ -8,9 +8,16 @@ namespace CompetingStandards.CSM.States
     [System.Serializable]
     public class CharacterStateJump : CompetingStandards.CSM.State
     {
-        protected override void OnStateUpdate()
+        [SerializeField] float jumpForce;
+       // ---
+
+        Rigidbody characterRB => SoureCharacter.RB;
+
+        // ---
+
+        protected override void OnStateEnter()
         {
-            Debug.Log("Jump state");
+            characterRB.AddForce(Vector3.up * jumpForce);
         }
     }
 }

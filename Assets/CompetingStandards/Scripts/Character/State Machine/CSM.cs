@@ -8,8 +8,7 @@ namespace CompetingStandards.CSM
     [CreateAssetMenu(fileName = "State Machine", menuName = "CompetingStandards/Character State Machine", order = 1)]
     public class StateMachine : ScriptableObject
     {
-        [SerializeReference] CSM.State[] states;
-        [SerializeReference] CSM.Transition[] transitions;
+        [SerializeField] StateWithTransitions[] states;
 
         // ---
 
@@ -19,7 +18,8 @@ namespace CompetingStandards.CSM
 
         // ---
 
-        public CSM.State CurrentState => states[currentStateIndex];
+        public CSM.State CurrentState => states[currentStateIndex].state;
+        public CSM.Transition[] CurrentTransitions => states[currentStateIndex].transitions;
 
         public Character SourceCharacter { get; private set; }
 
@@ -29,9 +29,14 @@ namespace CompetingStandards.CSM
         {
             SourceCharacter = source;
 
-            foreach (var state in states)
+            foreach (var stateWithTransitions in states)
             {
-                state.Initialize(this);
+                stateWithTransitions.state.Initialize(this);
+
+                foreach (var transition in stateWithTransitions.transitions)
+                {
+                    transition.Initialize(this);
+                }
             }
 
             initialized = true;
@@ -54,11 +59,29 @@ namespace CompetingStandards.CSM
 
             CurrentState.UpdateState(updateType);
 
-            var activeTransiton = transitions.Where(x => x.FromIndex == currentStateIndex).FirstOrDefault(x => x.CanTransition());
+            var activeTransiton = CurrentTransitions.FirstOrDefault(x => x.CanTransition());
             if (activeTransiton != null)
             {
                 ChangeStateTo(activeTransiton.ToIndex);
             }
+        }
+
+        // ---
+        [System.Serializable]
+        public struct StateWithTransitions
+        {
+            [SerializeReference, SubclassPicker] 
+            public CSM.State state;
+            public CSM.Transition[] transitions => transitionsHolder.Select(x => x.transition).ToArray();
+
+            
+            public Transitions[] transitionsHolder;
+        }
+
+        [System.Serializable]
+        public struct Transitions
+        {
+            [SerializeReference, SubclassPicker] public CSM.Transition transition;
         }
 
         // ---
