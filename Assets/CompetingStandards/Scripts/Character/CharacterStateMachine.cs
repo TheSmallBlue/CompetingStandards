@@ -13,7 +13,7 @@ namespace CompetingStandards
 
         // ---
 
-        private void Awake() 
+        void SetUpCharacterSM()
         {
             stateMachine.Initialize(this);
         }

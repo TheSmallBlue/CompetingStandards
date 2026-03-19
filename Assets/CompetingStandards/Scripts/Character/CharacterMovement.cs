@@ -18,11 +18,9 @@ namespace CompetingStandards
         [SerializeField] Vector3 _gravity = new Vector3(0, -9.8f, 0);
 
         [Space]
-        [SerializeField] float _maxBasicSpeed;
+        [SerializeField] float _startingMaxSpeed;
 
         [SerializeField] float _basicAcceleration, _basicDecceleration;
-
-        [SerializeField] float _speedAdaptabilityDelta = 1f;
 
         [Header("Slope Movement")]
         [SerializeField] float _slopeForce = 5f;
@@ -47,7 +45,7 @@ namespace CompetingStandards
 
         // ---
 
-        float maxSpeed;
+        float maxSpeed = -1f;
         float maxSpeedVelocity;
 
         // ---
@@ -59,6 +57,15 @@ namespace CompetingStandards
             rb.useGravity = false;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
+
+        // ---
+
+        void SetUpCharacterMovement()
+        {
+            maxSpeed = _startingMaxSpeed;
+        }
+
+        // ---
 
         /// <summary>
         /// Moves the character horizontally in the given direction. The Y axis is ignored.
@@ -80,8 +87,8 @@ namespace CompetingStandards
             DebugVector("Slope Force", new DebugVectorInfo() { position = transform.position, direction = slopeForce, color = new Color(0.000f, 1.000f, 0.533f, 1.000f) });
             force += slopeForce;
 
-            var snapToFloor = GetSnapToFloorForce(force);
-            force += snapToFloor;
+            //var snapToFloor = GetSnapToFloorForce(force);
+            //force += snapToFloor;
 
             DebugVector("Slope Dif", new DebugVectorInfo() { position = transform.position, direction = horMovement + slopeForce, color = Color.green });
 
@@ -90,12 +97,22 @@ namespace CompetingStandards
 
         // --
 
-        protected virtual Vector3 GetGravityForce() => _gravity;
+        // Speed up to maxSpeed
+        // Certain things (Such as going down slopes) up our maxSpeed
+        // Speed is maintained throughout hills and stuff
+        // Thats it literally thats it
 
-        protected virtual Vector3 GetHorizontalMovementForce(Vector3 direction)
+        // In regards to colission, to not overcomplicate stuff our ground collission consists of just a ball
+        // We handle damage colission in other ways
+
+        protected Vector3 GetGravityForce() => _gravity;
+
+        protected Vector3 GetHorizontalMovementForce(Vector3 direction)
         {
             Vector3 currentVelocity = RB.velocity;
             Vector3 currentHorizontalVelocity = currentVelocity.CollapseAxis(Axis.Y);
+
+            UpdateMaxSpeed(currentHorizontalVelocity);
 
             bool isGrounded = GroundedCheck(out RaycastHit groundInfo);
             Vector3 currentFloorNormal = isGrounded ? groundInfo.normal : Vector3.up;
@@ -104,12 +121,11 @@ namespace CompetingStandards
             // If there is no ground, move like we're on a flat plane.
             direction = Vector3.ProjectOnPlane(direction.CollapseAxis(Axis.Y), currentFloorNormal);
 
-            // Normally we want to speed up to our maxBasicSpeed.
-            // However, if our speed somehow gets above that, we want to maintain that new speed value.
-            // So, we adjust our maxSpeed accordingly.
-            float currentSpeed = isGrounded ? currentVelocity.magnitude : currentHorizontalVelocity.magnitude;
-            maxSpeed = currentSpeed > maxSpeed ? currentSpeed : Mathf.SmoothDamp(maxSpeed, currentSpeed, ref maxSpeedVelocity, _speedAdaptabilityDelta);
-            maxSpeed = Mathf.Clamp(maxSpeed, _maxBasicSpeed, Mathf.Infinity);
+            // Our maxSpeed cannot be less than our starting speed
+            // And if our current speed is lower than our maxSpeed, we set our maxSpeed to its default value
+            maxSpeed = Mathf.Clamp(maxSpeed, _startingMaxSpeed, Mathf.Infinity);
+            if(currentHorizontalVelocity.magnitude < _startingMaxSpeed / 2f) 
+                maxSpeed = _startingMaxSpeed;
 
             // Get the amount of velocity we need to add to our current velocity to reach our desired speed.
             Vector3 desiredVelocity = direction.normalized * maxSpeed;
@@ -127,12 +143,15 @@ namespace CompetingStandards
 
             // If we have a wall in front of us, we should cancel our velocity in the direction the wall is in.
             if (WallCheck(direction, out RaycastHit wallInfo))
+            {
+                Debug.Log("Hitting wall");
                 finalVelocity = finalVelocity.CollapseDirection(wallInfo.normal);
+            }
 
             return finalVelocity;
         }
 
-        protected virtual Vector3 GetSlopeForce(Vector3 horizontalMovement)
+        protected Vector3 GetSlopeForce(Vector3 horizontalMovement)
         {
             if (!GroundedCheck(out RaycastHit groundInfo)) return Vector3.zero;
 
@@ -147,9 +166,7 @@ namespace CompetingStandards
             DebugVector("Slope Normal", new DebugVectorInfo() { position = groundInfo.point, direction = groundInfo.normal * 3f, color = Color.blue });
             DebugVector("Slope Forward", new DebugVectorInfo() { position = groundInfo.point + Vector3.up, direction = slopeForward.normalized * 3f, color = new Color(0.000f, 0.765f, 1.000f, 1.000f) });
 
-            float slopeForce = Vector3.Dot(horizontalMovement, slopeForward) < 0 ? _slopeForce : _slopeForce * 10;
-
-            return slopeForward * Mathf.Clamp(speedDifference, 1f, Mathf.Infinity) * slopeForce;
+            return slopeForward * Mathf.Clamp(speedDifference, 1f, Mathf.Infinity);
         }
 
         public Vector3 GetSnapToFloorForce(Vector3 intendedForce)
@@ -162,6 +179,19 @@ namespace CompetingStandards
             if (!GroundedCheck(out RaycastHit futureFloorInfo, intendedForce.normalized)) return Vector3.zero;
 
             return (currentFloorInfo.point - transform.position).normalized * _groundSnappingForce;
+        }
+
+        // ---
+
+        void UpdateMaxSpeed(Vector3 currentHorizontalVelocity)
+        {
+            if (!GroundedCheck(out RaycastHit groundInfo)) return;
+
+            Vector3 slopeForward = -Vector3.Cross(Vector3.Cross(groundInfo.normal, Vector3.up), groundInfo.normal);
+
+            if (Vector3.Dot(currentHorizontalVelocity.normalized, slopeForward.normalized) <= 0.1f) return;
+
+            maxSpeed += _slopeForce;
         }
 
         // -- Checks --
@@ -189,8 +219,7 @@ namespace CompetingStandards
 
             if (!wallHit) return false;
 
-            GroundedCheck(out RaycastHit groundInfo);
-            if (Vector3.Angle(groundInfo.normal, hitInfo.normal) < _wallCheckAngle) return false;
+            if (GroundedCheck(out RaycastHit groundInfo) && Vector3.Angle(groundInfo.normal, hitInfo.normal) < _wallCheckAngle) return false;
 
             return true;
         }

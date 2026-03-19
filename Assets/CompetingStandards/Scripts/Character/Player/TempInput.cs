@@ -5,13 +5,12 @@ using SmallBlue.InspectorUtilities;
 using CompetingStandards;
 
 [RequireComponent(typeof(Character))]
-[RequireComponent(typeof(CameraController))]
 public class TempInput : MonoBehaviour
 {
     // TODO: Replace with unity's new input system
 
     [SerializeField, RequireAndAssignComponent] Character character;
-    [SerializeField, RequireAndAssignComponent] CameraController cameraController;
+    [SerializeField] CameraController cameraController;
 
     // ---
 
@@ -24,7 +23,7 @@ public class TempInput : MonoBehaviour
         character.Move(input);
     }
 
-    private void LateUpdate() 
+    private void Update() 
     {
         cameraController.RotateCamera(Input.GetAxisRaw("CamHorizontal"), Input.GetAxisRaw("CamVertical"));
     }

@@ -10,7 +10,7 @@ namespace CompetingStandards.CSM.States
     {
         protected override void OnStateUpdate()
         {
-            Debug.Log("Movement state");
+            //Debug.Log("Movement state");
         }
     }
 }

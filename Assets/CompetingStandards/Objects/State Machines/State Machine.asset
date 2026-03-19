@@ -17,7 +17,7 @@ MonoBehaviour:
       rid: 8558133482812604428
     transitionsHolder:
     - transition:
-        rid: 8202304640581632001
+        rid: 6160814614944153603
   - state:
       rid: 8558133482812604430
     transitionsHolder:
@@ -26,7 +26,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 8202304640581632001
+    - rid: 6160814614944153603
       type: {class: CSMInputPressedTransition, ns: CompetingStandards.CSM.Transitions,
         asm: Assembly-CSharp}
       data:
@@ -39,7 +39,7 @@ MonoBehaviour:
     - rid: 8558133482812604430
       type: {class: CharacterStateJump, ns: CompetingStandards.CSM.States, asm: Assembly-CSharp}
       data:
-        jumpForce: 50
+        jumpForce: 20
     - rid: 8558133482812604431
       type: {class: CSMGroundedTransition, ns: CompetingStandards.CSM.Transitions,
         asm: Assembly-CSharp}

@@ -7,6 +7,11 @@ namespace CompetingStandards
     // -- Main --
     public partial class Character : MonoBehaviour
     {
-
+        private void Awake() 
+        {
+            // Initialize the various modules of our character.
+            SetUpCharacterMovement();
+            SetUpCharacterSM();
+        }
     }
 }
