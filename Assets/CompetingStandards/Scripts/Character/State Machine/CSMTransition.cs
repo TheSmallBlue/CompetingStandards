@@ -12,10 +12,6 @@ namespace CompetingStandards.CSM
 
         // ---
 
-        public int ToIndex;
-
-        // ---
-
         protected bool initialized { get; private set; }
 
         // ---

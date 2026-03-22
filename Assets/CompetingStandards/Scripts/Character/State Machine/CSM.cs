@@ -19,7 +19,7 @@ namespace CompetingStandards.CSM
         // ---
 
         public CSM.State CurrentState => states[currentStateIndex].state;
-        public CSM.Transition[] CurrentTransitions => states[currentStateIndex].transitions;
+        public CSM.TransitionGroup[] CurrentTransitionGroups => states[currentStateIndex].transitionGroups;
 
         public Character SourceCharacter { get; private set; }
 
@@ -33,9 +33,9 @@ namespace CompetingStandards.CSM
             {
                 stateWithTransitions.state.Initialize(this);
 
-                foreach (var transition in stateWithTransitions.transitions)
+                foreach (var transition in stateWithTransitions.transitionGroups)
                 {
-                    transition.Initialize(this);
+                    transition.InitializeTransitions(this);
                 }
             }
 
@@ -59,7 +59,7 @@ namespace CompetingStandards.CSM
 
             CurrentState.UpdateState(updateType);
 
-            var activeTransiton = CurrentTransitions.FirstOrDefault(x => x.CanTransition());
+            var activeTransiton = CurrentTransitionGroups.FirstOrDefault(x => x.CanTransition());
             if (activeTransiton != null)
             {
                 ChangeStateTo(activeTransiton.ToIndex);
@@ -72,16 +72,7 @@ namespace CompetingStandards.CSM
         {
             [SerializeReference, SubclassPicker] 
             public CSM.State state;
-            public CSM.Transition[] transitions => transitionsHolder.Select(x => x.transition).ToArray();
-
-            
-            public Transitions[] transitionsHolder;
-        }
-
-        [System.Serializable]
-        public struct Transitions
-        {
-            [SerializeReference, SubclassPicker] public CSM.Transition transition;
+            public CSM.TransitionGroup[] transitionGroups;
         }
 
         // ---
