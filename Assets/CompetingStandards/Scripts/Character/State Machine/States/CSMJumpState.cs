@@ -17,6 +17,7 @@ namespace CompetingStandards.CSM.States
 
         protected override void OnStateEnter()
         {
+            Debug.Log("Jump");
             characterRB.AddForce(Vector3.up * jumpForce);
         }
     }

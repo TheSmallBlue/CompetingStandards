@@ -18,21 +18,23 @@ MonoBehaviour:
     transitionGroups:
     - IncludedTransitions:
       - transition:
-          rid: 6160814835635585026
+          rid: 6160814840823939077
       - transition:
-          rid: 6160814835635585030
+          rid: 6160814840823939076
       ToIndex: 1
     - IncludedTransitions:
       - transition:
-          rid: 6160814835635585028
+          rid: 6160814840823939080
+      - transition:
+          rid: 6160814840823939079
       ToIndex: 2
   - state:
       rid: 8558133482812604430
     transitionGroups:
     - IncludedTransitions:
       - transition:
-          rid: 6160814835635585027
-      ToIndex: 0
+          rid: 6160814840823939078
+      ToIndex: 2
   - state:
       rid: 6160814835635585029
     transitionGroups:
@@ -43,34 +45,44 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 6160814835635585026
-      type: {class: CSMInputPressedTransition, ns: CompetingStandards.CSM.Transitions,
-        asm: Assembly-CSharp}
-      data:
-        input: {fileID: -2099379676528639254, guid: 67faad8d1ab54aa4a8e2a40466d3d31f,
-          type: 3}
     - rid: 6160814835635585027
       type: {class: CSMGroundedTransition, ns: CompetingStandards.CSM.Transitions,
         asm: Assembly-CSharp}
       data:
         shouldBeGrounded: 1
-    - rid: 6160814835635585028
-      type: {class: CSMGroundedTransition, ns: CompetingStandards.CSM.Transitions,
-        asm: Assembly-CSharp}
-      data:
-        shouldBeGrounded: 0
     - rid: 6160814835635585029
       type: {class: CharacterStateFall, ns: CompetingStandards.CSM.States, asm: Assembly-CSharp}
       data: 
-    - rid: 6160814835635585030
+    - rid: 6160814840823939076
+      type: {class: CSMInputPressedTransition, ns: CompetingStandards.CSM.Transitions,
+        asm: Assembly-CSharp}
+      data:
+        input: {fileID: -2099379676528639254, guid: 67faad8d1ab54aa4a8e2a40466d3d31f,
+          type: 3}
+    - rid: 6160814840823939077
       type: {class: CSMGroundedTransition, ns: CompetingStandards.CSM.Transitions,
         asm: Assembly-CSharp}
       data:
         shouldBeGrounded: 1
+    - rid: 6160814840823939078
+      type: {class: CSMFallingTransition, ns: CompetingStandards.CSM.Transitions,
+        asm: Assembly-CSharp}
+      data:
+        shouldBeFalling: 1
+    - rid: 6160814840823939079
+      type: {class: CSMFallingTransition, ns: CompetingStandards.CSM.Transitions,
+        asm: Assembly-CSharp}
+      data:
+        shouldBeFalling: 1
+    - rid: 6160814840823939080
+      type: {class: CSMGroundedTransition, ns: CompetingStandards.CSM.Transitions,
+        asm: Assembly-CSharp}
+      data:
+        shouldBeGrounded: 0
     - rid: 8558133482812604428
       type: {class: CharacterStateMovement, ns: CompetingStandards.CSM.States, asm: Assembly-CSharp}
       data: 
     - rid: 8558133482812604430
       type: {class: CharacterStateJump, ns: CompetingStandards.CSM.States, asm: Assembly-CSharp}
       data:
-        jumpForce: 20
+        jumpForce: 250

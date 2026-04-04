@@ -1,0 +1,169 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AM_Lucilda_Head
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: arm.lucilda
+    m_Weight: 0
+  - m_Path: arm.lucilda/root
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/BENDYspine
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.L/hand.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.L/hand.L/index.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.L/hand.L/index.L/index.002.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.L/hand.L/middle.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.L/hand.L/middle.L/middle.002.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.L/hand.L/SCALE.index.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.L/hand.L/SCALE.middle.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.L/hand.L/SCALE.thumb.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.L/hand.L/thumb.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.L/hand.L/thumb.L/thumb.002.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.R/hand.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.R/hand.R/index.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.R/hand.R/index.R/index.002.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.R/hand.R/middle.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.R/hand.R/middle.R/middle.002.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.R/hand.R/SCALE.index.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.R/hand.R/SCALE.middle.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.R/hand.R/SCALE.thumb.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.R/hand.R/thumb.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIK.R/hand.R/thumb.R/thumb.002.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIKPole.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/armIKPole.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/BASE.neck
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/BASE.head
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head
+    m_Weight: 1
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/CONT.eyeMid
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/CONT.eyeMid/CONT.eye.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/CONT.eyeMid/CONT.eye.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/ear.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/ear.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/eye.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/eye.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/hair
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/hair/CONT.hair
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/hair.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/hair.L/CONT.hair.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/hair.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/hair.R/CONT.hair.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/jaw
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/mouthEnd.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/mouthEnd.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/PANEL.faceController
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/PANEL.faceController/SHAPE.blink.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/PANEL.faceController/SHAPE.blink.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/CONT.chest/neck/head/snout
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/shoulder.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/shoulder.L/arm.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/shoulder.L/arm.L/foreArm.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/shoulder.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/shoulder.R/arm.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/CONT.chestRotate/shoulder.R/arm.R/foreArm.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/hips
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/hips/thigh.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/hips/thigh.L/lowerLeg.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/hips/thigh.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/hips/thigh.R/lowerLeg.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/tail.01
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/tail.01/tail.02
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/CONT.waist/tail.01/tail.02/tail.03
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/legIK.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/legIK.L/foot.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/legIK.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/legIK.R/foot.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/legIKPole.L
+    m_Weight: 0
+  - m_Path: arm.lucilda/root/legIKPole.R
+    m_Weight: 0
+  - m_Path: arm.lucilda/spine01
+    m_Weight: 0
+  - m_Path: arm.lucilda/spine02
+    m_Weight: 0
+  - m_Path: arm.lucilda/spine03
+    m_Weight: 0
+  - m_Path: mesh.lucilda
+    m_Weight: 0

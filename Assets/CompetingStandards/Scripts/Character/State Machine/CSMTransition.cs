@@ -20,7 +20,7 @@ namespace CompetingStandards.CSM
 
         // ---
 
-        public void Initialize(CSM.StateMachine source)
+        public virtual void Initialize(CSM.StateMachine source)
         {
             SourceMachine = source;
 

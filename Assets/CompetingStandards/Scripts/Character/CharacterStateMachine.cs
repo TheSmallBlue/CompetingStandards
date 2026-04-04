@@ -18,7 +18,7 @@ namespace CompetingStandards
             stateMachine.Initialize(this);
         }
 
-        void Update()
+        void UpdateCharacterSM()
         {
             stateMachine.UpdateStateMachine(CSM.StateMachine.UpdateType.Update);
         }

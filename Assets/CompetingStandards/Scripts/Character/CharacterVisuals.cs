@@ -7,7 +7,8 @@ namespace CompetingStandards
     public partial class Character : MonoBehaviour
     {
         [Header("Visuals")]
-        [SerializeField] Transform playerMesh;
+        [SerializeField] Transform charaMesh;
+        [SerializeField] Animator charaAnim;
 
         [Header("Ground Snapping")]
         [SerializeField] Vector3 groundSnappingPlayerMeshOffset;
@@ -21,32 +22,31 @@ namespace CompetingStandards
         Vector3 groundSnappingVelocity;
         Quaternion groundRotationVelocity;
 
+        float tiltDifference;
+        float tiltDifferenceVel;
+
+        float meshPositionTime = 0.1f;
+        Vector3 meshPositionVel;
+
         // ---
+
+        private void UpdateCharacterVisuals() 
+        {
+            Vector3 cross = Vector3.Cross(RB.velocity.normalized, Vector3.up);
+            tiltDifference = -Vector3.Dot(desiredDirection.normalized, cross);
+            charaAnim.SetFloat("TiltDifference", Mathf.SmoothDamp(charaAnim.GetFloat("TiltDifference"), tiltDifference, ref tiltDifferenceVel, 0.1f));
+
+            charaAnim.SetFloat("SpeedPercentage", RB.velocity.CollapseAxis(Axis.Y).magnitude / _startingMaxSpeed);
+
+            charaAnim.SetBool("Grounded", GroundedCheck(out RaycastHit hitInfo));
+        }
 
         private void LateUpdate()
         {
-            playerMesh.localPosition = GetMeshOffset(playerMesh.localPosition);
-            playerMesh.rotation = GetMeshRotation(playerMesh.rotation);
-        }
+            charaMesh.rotation = GetMeshRotation(charaMesh.rotation);
 
-        // ---
-
-        Vector3 GetMeshOffset(Vector3 currentOffset)
-        {
-            return GetFloorDistanceOffset();
-        }
-
-        Vector3 GetFloorDistanceOffset()
-        {
-            if (initialMeshOffset == null)
-                initialMeshOffset = playerMesh.localPosition;
-
-            bool grounded = GroundedCheck(out RaycastHit groundInfo);
-
-            Vector3 floorPoint = grounded ? groundInfo.point + groundSnappingPlayerMeshOffset : Vector3.zero;
-            Vector3 dirToFloor = grounded ? floorPoint - transform.position : initialMeshOffset.Value;
-
-            return Vector3.SmoothDamp(playerMesh.localPosition, dirToFloor, ref groundSnappingVelocity, groundSnappingTime);
+            Vector3 desiredPos = GroundedCheck(out RaycastHit hitInfo) ? hitInfo.point : transform.position;
+            charaMesh.position = Vector3.SmoothDamp(charaMesh.position, desiredPos, ref meshPositionVel, meshPositionTime);
         }
 
         // ---
@@ -58,9 +58,10 @@ namespace CompetingStandards
 
         Quaternion GetForwardRotation()
         {
-            if (RB.velocity.magnitude < 0.5f) return playerMesh.rotation;
+            Quaternion targetRotation = GroundedCheck(out RaycastHit hitInfo) && RB.velocity.CollapseAxis(Axis.Y).magnitude > 0.5f ? Quaternion.LookRotation(RB.velocity.normalized, Vector3.up) : Quaternion.LookRotation(RB.velocity.CollapseAxis(Axis.Y).normalized, Vector3.up);
 
-            return QuaternionUtil.SmoothDamp(playerMesh.rotation, Quaternion.LookRotation(RB.velocity.normalized, Vector3.up), ref groundRotationVelocity, groundRotationTime);
+
+            return QuaternionUtil.SmoothDamp(charaMesh.rotation, targetRotation, ref groundRotationVelocity, groundRotationTime);
         }
     }
 }

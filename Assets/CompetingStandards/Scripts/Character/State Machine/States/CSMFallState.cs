@@ -7,7 +7,7 @@ namespace CompetingStandards.CSM.States
     {
         protected override void OnStateUpdate()
         {
-            Debug.Log("Falling update");
+            
         }
     }
 }

@@ -48,6 +48,8 @@ namespace CompetingStandards
         float maxSpeed = -1f;
         float maxSpeedVelocity;
 
+        Vector3 desiredDirection;
+
         // ---
 
         private void OnValidate()
@@ -120,6 +122,7 @@ namespace CompetingStandards
             // Project desired movement onto ground below.
             // If there is no ground, move like we're on a flat plane.
             direction = Vector3.ProjectOnPlane(direction.CollapseAxis(Axis.Y), currentFloorNormal);
+            desiredDirection = direction;
 
             // Our maxSpeed cannot be less than our starting speed
             // And if our current speed is lower than our maxSpeed, we set our maxSpeed to its default value
@@ -171,14 +174,10 @@ namespace CompetingStandards
 
         public Vector3 GetSnapToFloorForce(Vector3 intendedForce)
         {
-            // We must be grounded
-            if (!GroundedCheck(out RaycastHit currentFloorInfo)) return Vector3.zero;
-            // We must be above the floor
-            if (Vector3.Distance(transform.position, currentFloorInfo.point) < _groundSnappingRequiredDistance) return Vector3.zero;
-            // There has to be more floor in front of us
-            if (!GroundedCheck(out RaycastHit futureFloorInfo, intendedForce.normalized)) return Vector3.zero;
-
-            return (currentFloorInfo.point - transform.position).normalized * _groundSnappingForce;
+            // If we go from a floor to another floor with a different angle, and if we're going downhill, we should snap to the new floor angle
+            // OR; if we go from a floor to a floor with a different angle, we should KEEP OUR CURRENT VELOCITY but going DOWN THAT ANGLE instead.
+            // Redirection our velocity towards the new floor forward
+            return Vector3.zero;
         }
 
         // ---

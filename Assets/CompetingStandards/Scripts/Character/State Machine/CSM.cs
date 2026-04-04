@@ -46,6 +46,8 @@ namespace CompetingStandards.CSM
         {
             if (!initialized) throw new System.Exception("State Machine not initialized!");
 
+            Debug.Log(stateIndex);
+
             CurrentState.ExitState();
 
             currentStateIndex = stateIndex;

@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour
 
     Vector3 GetPositionVector()
     {
-        Vector3 intendedDirection = -CameraTransform.forward * 10f;
+        Vector3 intendedDirection = -CameraTransform.forward * distance;
 
         /*
 

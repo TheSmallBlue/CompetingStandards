@@ -13,5 +13,15 @@ namespace CompetingStandards
             SetUpCharacterMovement();
             SetUpCharacterSM();
         }
+
+        void Update()
+        {
+            UpdateCharacterVisuals();
+        }
+
+        void FixedUpdate()
+        {
+            UpdateCharacterSM();
+        }
     }
 }
