@@ -59,6 +59,7 @@ MonoBehaviour:
       data:
         input: {fileID: -2099379676528639254, guid: 67faad8d1ab54aa4a8e2a40466d3d31f,
           type: 3}
+        waitUntilFixedUpdate: 1
     - rid: 6160814840823939077
       type: {class: CSMGroundedTransition, ns: CompetingStandards.CSM.Transitions,
         asm: Assembly-CSharp}
@@ -86,3 +87,5 @@ MonoBehaviour:
       type: {class: CharacterStateJump, ns: CompetingStandards.CSM.States, asm: Assembly-CSharp}
       data:
         jumpForce: 250
+        jumpInput: {fileID: -2099379676528639254, guid: 67faad8d1ab54aa4a8e2a40466d3d31f,
+          type: 3}

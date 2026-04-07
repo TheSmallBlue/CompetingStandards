@@ -22,5 +22,10 @@ namespace CompetingStandards
         {
             stateMachine.UpdateStateMachine(CSM.StateMachine.UpdateType.Update);
         }
+
+        void FixedUpdateCharacterSM()
+        {
+            stateMachine.UpdateStateMachine(CSM.StateMachine.UpdateType.FixedUpdate);
+        }
     }
 }

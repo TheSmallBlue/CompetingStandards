@@ -10,7 +10,7 @@ namespace CompetingStandards.CSM.Transitions
 
         // ---
 
-        public override bool CanTransition()
+        protected override bool CanTransitionFixedUpdate()
         {
             return shouldBeGrounded == SourceCharacter.GroundedCheck(out RaycastHit hitInfo);
         }

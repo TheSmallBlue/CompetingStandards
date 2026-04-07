@@ -17,11 +17,12 @@ namespace CompetingStandards
         void Update()
         {
             UpdateCharacterVisuals();
+            UpdateCharacterSM();
         }
 
         void FixedUpdate()
         {
-            UpdateCharacterSM();
+            FixedUpdateCharacterSM();
         }
     }
 }

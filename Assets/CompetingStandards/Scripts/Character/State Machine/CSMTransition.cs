@@ -16,7 +16,22 @@ namespace CompetingStandards.CSM
 
         // ---
 
-        public abstract bool CanTransition();
+        public bool CanTransition(StateMachine.UpdateType updateType)
+        {
+            if (!initialized) throw new System.Exception("State not initialized!");
+
+            switch (updateType)
+            {
+                case StateMachine.UpdateType.FixedUpdate:
+                    return CanTransitionFixedUpdate();
+                
+                default:
+                    return CanTransitionUpdate();
+            }
+        }
+
+        protected virtual bool CanTransitionUpdate() => false;
+        protected virtual bool CanTransitionFixedUpdate() => false;
 
         // ---
 
@@ -26,5 +41,9 @@ namespace CompetingStandards.CSM
 
             initialized = true;
         }
+
+        // ---
+
+        public virtual void OnTransitionedInto() {}
     }
 }

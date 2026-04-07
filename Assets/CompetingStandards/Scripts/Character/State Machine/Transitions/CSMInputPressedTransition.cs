@@ -10,12 +10,35 @@ namespace CompetingStandards.CSM.Transitions
     public class CSMInputPressedTransition : Transition
     {
         [SerializeField] InputActionReference input;
+        [SerializeField] bool waitUntilFixedUpdate;
 
         // ---
 
-        public override bool CanTransition()
+        bool inputPressed;
+
+        // ---
+
+        public override void OnTransitionedInto()
         {
-            return input.action.IsPressed();
+            inputPressed = false;
+        }
+
+        // ---
+
+        protected override bool CanTransitionUpdate()
+        {
+            if(!waitUntilFixedUpdate)
+                return input.action.IsPressed();
+            
+            if(input.action.IsPressed())
+                inputPressed = true;
+
+            return false;
+        }
+
+        protected override bool CanTransitionFixedUpdate()
+        {
+            return inputPressed;
         }
     }
 }

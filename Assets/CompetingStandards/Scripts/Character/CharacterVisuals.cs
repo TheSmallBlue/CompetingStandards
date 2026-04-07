@@ -58,8 +58,10 @@ namespace CompetingStandards
 
         Quaternion GetForwardRotation()
         {
-            Quaternion targetRotation = GroundedCheck(out RaycastHit hitInfo) && RB.velocity.CollapseAxis(Axis.Y).magnitude > 0.5f ? Quaternion.LookRotation(RB.velocity.normalized, Vector3.up) : Quaternion.LookRotation(RB.velocity.CollapseAxis(Axis.Y).normalized, Vector3.up);
-
+            Quaternion targetRotation = GroundedCheck(out RaycastHit hitInfo) && RB.velocity.CollapseAxis(Axis.Y).magnitude > 0.5f ? Quaternion.LookRotation(Vector3.ProjectOnPlane(RB.velocity, hitInfo.normal).normalized, Vector3.up) : Quaternion.LookRotation(RB.velocity.CollapseAxis(Axis.Y).normalized, Vector3.up);
+            
+            if(RB.velocity.CollapseAxis(Axis.Y).magnitude < 0.1f)
+                targetRotation = charaMesh.rotation;
 
             return QuaternionUtil.SmoothDamp(charaMesh.rotation, targetRotation, ref groundRotationVelocity, groundRotationTime);
         }

@@ -21,7 +21,18 @@ namespace CompetingStandards.CSM
             }
         }
 
-        public bool CanTransition() => IncludedTransitions.Select(x => x.transition).All(x => x.CanTransition());
+        public bool CanTransition(StateMachine.UpdateType updateType)
+        {
+            int transitionableTransitions = 0;
+
+            foreach (var transition in IncludedTransitions.Select(x => x.transition))
+            {
+                if(transition.CanTransition(updateType))
+                    transitionableTransitions++;
+            }
+            
+            return transitionableTransitions >= IncludedTransitions.Length;
+        }
 
         // ---
 

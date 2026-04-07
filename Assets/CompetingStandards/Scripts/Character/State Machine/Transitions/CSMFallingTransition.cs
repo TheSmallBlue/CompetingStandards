@@ -10,7 +10,7 @@ namespace CompetingStandards.CSM.Transitions
 
         // ---
 
-        public override bool CanTransition()
+        protected override bool CanTransitionFixedUpdate()
         {
             return shouldBeFalling == SourceCharacter.RB.velocity.y < 0f;
         }

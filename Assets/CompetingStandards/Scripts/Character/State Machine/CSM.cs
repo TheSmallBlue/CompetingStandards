@@ -61,10 +61,16 @@ namespace CompetingStandards.CSM
 
             CurrentState.UpdateState(updateType);
 
-            var activeTransiton = CurrentTransitionGroups.FirstOrDefault(x => x.CanTransition());
-            if (activeTransiton != null)
+            var activeTransitonGroup = CurrentTransitionGroups.FirstOrDefault(x => x.CanTransition(updateType));
+            //var activeTransitonGroup = CurrentTransitionGroups.FirstOrDefault(x => x.IncludedTransitions.All(x => x.transition.CanTransition(updateType)));
+            if (activeTransitonGroup != default(TransitionGroup))
             {
-                ChangeStateTo(activeTransiton.ToIndex);
+                ChangeStateTo(activeTransitonGroup.ToIndex);
+                
+                foreach (var transition in CurrentTransitionGroups.SelectMany(x => x.IncludedTransitions).Select(x => x.transition))
+                {
+                    transition.OnTransitionedInto();
+                }
             }
         }
 
